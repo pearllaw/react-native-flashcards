@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Text, TextInput } from 'react-native'
+import { StyleSheet, ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native'
 
 export default class AddCard extends Component {
   constructor(props) {
@@ -32,6 +32,9 @@ export default class AddCard extends Component {
                 onChangeText={(text) => this.setState({ answer: text })} />
             </ScrollView>
           </View>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Save</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -42,17 +45,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    width: '70%'
+    width: '70%',
   },
   form: {
-    borderRadius: 10,
+    borderRadius: 15,
     borderWidth: 0.5,
-    padding: 40
+    borderColor: 'transparent',
+    padding: 40,
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 22,
     marginBottom: 30,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: '500'
   },
   input: {
     width: '100%'
@@ -72,5 +78,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     height: 200
+  },
+  button: {
+    backgroundColor: '#1b1b1b',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 20,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    borderRadius: 20,
+    width: '50%' 
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold'
   }
 })

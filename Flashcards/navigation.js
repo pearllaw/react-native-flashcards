@@ -9,9 +9,8 @@ class Create extends Component {
   static navigationOptions = {
     title: 'New Flashcard',
     headerStyle: {
-      backgroundColor: '#0074D9'
-    },
-    headerTintColor: '#fff'
+      backgroundColor: '#6effff'
+    }
   }
   render() {
     return (
@@ -99,6 +98,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#00e5ff'
   }
 })
