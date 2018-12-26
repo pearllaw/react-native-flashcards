@@ -1,20 +1,35 @@
-import { createBottomTabNavigator } from 'react-navigation'
 import React, { Component } from 'react'
+import AddCard from './containers/addCard'
 import { StyleSheet, View, Text } from 'react-native'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 
 class Create extends Component {
+  static navigationOptions = {
+    title: 'New Flashcard',
+    headerStyle: {
+      backgroundColor: '#0074D9'
+    },
+    headerTintColor: '#fff'
+  }
   render() {
     return (
       <View style={styles.tabs}>
-        <Text>Create</Text>
+        <AddCard />
       </View>
     )
   }
 }
 
 class Deck extends Component {
+  static navigationOptions = {
+    title: 'Deck',
+    headerStyle: {
+      backgroundColor: '#0074D9'
+    },
+    headerTintColor: '#fff'
+  }
   render() {
     return (
       <View style={styles.tabs}>
@@ -25,6 +40,13 @@ class Deck extends Component {
 }
 
 class Practice extends Component {
+  static navigationOptions = {
+    title: 'Practice',
+    headerStyle: {
+      backgroundColor: '#0074D9'
+    },
+    headerTintColor: '#fff'
+  }
   render() {
     return (
       <View style={styles.tabs}>
@@ -33,37 +55,50 @@ class Practice extends Component {
     )
   }
 }
-  
-const NavTabs = createBottomTabNavigator({
-    Create: {
-      screen: Create,
-      navigationOptions: {
-        tabBarIcon: ({tintColor}) => <SimpleLineIcons name="plus" size={20} style={{ padding: 10 }} color={tintColor} />,
-        tabBarOptions: { activeTintColor: 'blue'}
-      }
-    },
-    Deck: {
-      screen: Deck,
-      navigationOptions: {
-        tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="cards-outline" size={24} style={{ padding: 10 }} color={tintColor} />,
-        tabBarOptions: { activeTintColor: 'blue' }
-      }
-    },
-    Practice: {
-      screen: Practice,
-      navigationOptions: {
-        tabBarIcon: ({tintColor}) => <SimpleLineIcons name="list" size={20} style={{ padding: 10 }} color={tintColor} />,
-        tabBarOptions: { activeTintColor: 'blue' }
-      }
-    }
+
+const CreateHeader = createStackNavigator({
+  Create: { screen: Create }
 })
 
-export default NavTabs
+const DeckHeader = createStackNavigator({
+  Deck: { screen: Deck }
+})
+
+const PracticeHeader = createStackNavigator({
+  Practice: { screen: Practice }
+})
+
+const NavigationStack = createBottomTabNavigator({
+  Create: {
+    screen: CreateHeader,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <SimpleLineIcons name="plus" size={20} style={{ padding: 10 }} color={tintColor} />,
+      tabBarOptions: { activeTintColor: '#38A1F3'}
+    }
+  },
+  Deck: {
+    screen: DeckHeader,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="cards-outline" size={24} style={{ padding: 10 }} color={tintColor} />,
+      tabBarOptions: { activeTintColor: '#38A1F3' }
+    }
+  },
+  Practice: {
+    screen: PracticeHeader,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <SimpleLineIcons name="list" size={20} style={{ padding: 10 }} color={tintColor} />,
+      tabBarOptions: { activeTintColor: '#38A1F3' }
+    }
+  }
+})
+
+export default NavigationStack
 
 const styles = StyleSheet.create({
   tabs: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#fff'
   }
 })
