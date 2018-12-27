@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AddCard from './containers/addCard'
+import FlashcardDeck from './containers/Deck'
 import { StyleSheet, View, Text } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
@@ -25,14 +26,13 @@ class Deck extends Component {
   static navigationOptions = {
     title: 'Deck',
     headerStyle: {
-      backgroundColor: '#0074D9'
-    },
-    headerTintColor: '#fff'
+      backgroundColor: '#6effff'
+    }
   }
   render() {
     return (
       <View style={styles.tabs}>
-        <Text>Deck</Text>
+        <FlashcardDeck />
       </View>
     )
   }
@@ -42,9 +42,8 @@ class Practice extends Component {
   static navigationOptions = {
     title: 'Practice',
     headerStyle: {
-      backgroundColor: '#0074D9'
-    },
-    headerTintColor: '#fff'
+      backgroundColor: '#6effff'
+    }
   }
   render() {
     return (
@@ -96,8 +95,6 @@ export default NavigationStack
 const styles = StyleSheet.create({
   tabs: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#00e5ff'
   }
 })

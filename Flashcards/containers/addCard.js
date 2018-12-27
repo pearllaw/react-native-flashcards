@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    width: '70%',
+    alignItems: 'center'
   },
   form: {
     borderRadius: 15,
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     padding: 40,
     backgroundColor: '#fff',
+    width: '70%'
   },
   title: {
     fontSize: 22,
