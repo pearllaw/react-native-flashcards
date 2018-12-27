@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import Entypo from '@expo/vector-icons/Entypo'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
 function Card() {
   return (
     <View style={styles.card}>
+      <View style={styles.icons}>
+        <MaterialIcons name="delete" size={18} style={{ padding: 5 }} />
+        <Entypo name="edit" size={18} style={{ padding: 5 }} />
+      </View>
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle}>Question</Text>
         <Text style={styles.cardText}>This is a sample question</Text>
@@ -47,5 +53,8 @@ const styles = StyleSheet.create({
   },
   cardText: {
     padding: 10
+  },
+  icons: {
+    flexDirection: 'row-reverse'
   }
 })
