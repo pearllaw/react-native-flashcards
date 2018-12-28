@@ -1,42 +1,42 @@
 import React, { Component } from 'react'
 import AddCard from './containers/addCard'
-import FlashcardDeck from './containers/Deck'
+import Deck from './containers/Deck'
 import { StyleSheet, View, Text } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 
-class Create extends Component {
-  static navigationOptions = {
-    title: 'New Flashcard',
-    headerStyle: {
-      backgroundColor: '#6effff'
-    }
-  }
-  render() {
-    return (
-      <View style={styles.tabs}>
-        <AddCard />
-      </View>
-    )
-  }
-}
+// class Create extends Component {
+//   static navigationOptions = {
+//     title: 'New Flashcard',
+//     headerStyle: {
+//       backgroundColor: '#6effff'
+//     }
+//   }
+//   render() {
+//     return (
+//       <View style={styles.tabs}>
+//         <AddCard />
+//       </View>
+//     )
+//   }
+// }
 
-class Deck extends Component {
-  static navigationOptions = {
-    title: 'Deck',
-    headerStyle: {
-      backgroundColor: '#6effff'
-    }
-  }
-  render() {
-    return (
-      <View style={styles.tabs}>
-        <FlashcardDeck />
-      </View>
-    )
-  }
-}
+// class Deck extends Component {
+//   static navigationOptions = {
+//     title: 'Deck',
+//     headerStyle: {
+//       backgroundColor: '#6effff'
+//     }
+//   }
+//   render() {
+//     return (
+//       <View style={styles.tabs}>
+//         <FlashcardDeck />
+//       </View>
+//     )
+//   }
+// }
 
 class Practice extends Component {
   static navigationOptions = {
@@ -54,13 +54,13 @@ class Practice extends Component {
   }
 }
 
-const CreateHeader = createStackNavigator({
-  Create: { screen: Create }
-})
+// const CreateHeader = createStackNavigator({
+//   Create: { screen: AddCard }
+// })
 
-const DeckHeader = createStackNavigator({
-  Deck: { screen: Deck }
-})
+// const DeckHeader = createStackNavigator({
+//   Deck: { screen: Deck }
+// })
 
 const PracticeHeader = createStackNavigator({
   Practice: { screen: Practice }
@@ -68,14 +68,14 @@ const PracticeHeader = createStackNavigator({
 
 const NavigationStack = createBottomTabNavigator({
   Create: {
-    screen: CreateHeader,
+    screen: AddCard,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <SimpleLineIcons name="plus" size={20} style={{ padding: 10 }} color={tintColor} />,
       tabBarOptions: { activeTintColor: '#38A1F3'}
     }
   },
   Deck: {
-    screen: DeckHeader,
+    screen: Deck,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="cards-outline" size={24} style={{ padding: 10 }} color={tintColor} />,
       tabBarOptions: { activeTintColor: '#38A1F3' }
