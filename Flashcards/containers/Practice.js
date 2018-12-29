@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import CardFlip from 'react-native-card-flip'
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native'
 import Octicons from '@expo/vector-icons/Octicons'
+import CardFlip from 'react-native-card-flip'
+import ProgressBarAnimated from 'react-native-progress-bar-animated'
 
 export default class Practice extends Component {
   static navigationOptions = {
@@ -14,7 +15,8 @@ export default class Practice extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentIndex: 0
+      currentIndex: 0,
+      progress: 0 
     }
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
@@ -22,20 +24,35 @@ export default class Practice extends Component {
 
   prev() {
     const { currentIndex } = this.state
-    this.setState({ currentIndex: currentIndex > 0 ? currentIndex - 1 : 0 })
+    const { flashcards } = this.props.screenProps
+    this.setState({ 
+      currentIndex: currentIndex > 0 ? currentIndex - 1 : 0,
+      progress: currentIndex >= 0 ? Math.floor((currentIndex - 1 / flashcards.length)*100) : 0
+    })
   }
 
   next() {
     const { currentIndex } = this.state
     const { flashcards } = this.props.screenProps
-    this.setState({ currentIndex: currentIndex < flashcards.length - 1 ? currentIndex + 1 : 0 })
+    this.setState({ 
+      currentIndex: currentIndex < flashcards.length - 1 ? currentIndex + 1 : 0,
+      progress: currentIndex < flashcards.length - 1 ? Math.floor((currentIndex + 1 / flashcards.length)*100) : 100
+    })
   }
 
   render() {
-    const { currentIndex } = this.state
+    const { currentIndex, progress } = this.state
     const { flashcards } = this.props.screenProps
+    const barWidth = Dimensions.get('screen').width - 80
+    const progressCustomStyles = {
+      backgroundColor: 'green',
+      borderColor: 'none'
+    }
     return (
       <View style={styles.container}>
+        <ProgressBarAnimated {...progressCustomStyles} 
+          width={barWidth} 
+          value={progress} />
         <Octicons style={styles.iconLeft} name="chevron-left" onPress={this.prev} />
         <CardFlip styles={styles.cardContainer} ref={(card) => this.card = card}>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
