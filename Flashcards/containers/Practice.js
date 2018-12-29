@@ -14,31 +14,38 @@ export default class Practice extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentIndex: 0,
-      flashcards: []
+      currentIndex: 0
     }
+    this.prev = this.prev.bind(this)
+    this.next = this.next.bind(this)
   }
 
-  componentDidMount() {
-    this.setState({ flashcards: this.props.screenProps.flashcards })
+  prev() {
+    const { currentIndex } = this.state
+    this.setState({ currentIndex: currentIndex > 0 ? currentIndex - 1 : 0 })
+  }
+
+  next() {
+    const { currentIndex } = this.state
+    const { flashcards } = this.props.screenProps
+    this.setState({ currentIndex: currentIndex < flashcards.length - 1 ? currentIndex + 1 : 0 })
   }
 
   render() {
-    const { flashcards } = this.state
+    const { currentIndex } = this.state
+    const { flashcards } = this.props.screenProps
     return (
       <View style={styles.container}>
-        <Octicons style={styles.iconLeft} name="chevron-left" />
-        {flashcards.map((card, index) => (
-        <CardFlip key={index} styles={styles.cardContainer} ref={(card) => this.card = card}>
+        <Octicons style={styles.iconLeft} name="chevron-left" onPress={this.prev} />
+        <CardFlip styles={styles.cardContainer} ref={(card) => this.card = card}>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>{card.question}</Text>
+            <Text style={styles.text}>{flashcards[currentIndex].question}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>{card.answer}</Text>
+            <Text style={styles.text}>{flashcards[currentIndex].answer}</Text>
           </TouchableOpacity>
         </CardFlip>
-        ))}
-        <Octicons style={styles.iconRight} name="chevron-right" />
+        <Octicons style={styles.iconRight} name="chevron-right" onPress={this.next} />
       </View>
     )
   }
