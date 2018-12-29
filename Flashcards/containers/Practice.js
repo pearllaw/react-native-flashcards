@@ -23,16 +23,19 @@ export default class Practice extends Component {
   }
 
   render() {
+    const { flashcards } = this.state
     return (
       <View style={styles.container}>
-        <CardFlip styles={styles.cardContainer} ref={(card) => this.card = card}>
+        {flashcards.map((card, index) => (
+        <CardFlip key={index} styles={styles.cardContainer} ref={(card) => this.card = card}>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>Card Data Question</Text>
+            <Text style={styles.text}>{card.question}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>Card Data Answer</Text>
+            <Text style={styles.text}>{card.answer}</Text>
           </TouchableOpacity>
         </CardFlip>
+        ))}
       </View>
     )
   }
