@@ -42,8 +42,7 @@ export default class Deck extends Component {
   }
 
   deleteCard(id) {
-    const removeCard = this.props.screenProps.flashcards.filter(card => card.id === id)
-    this.props.screenProps.deleteCard(removeCard)
+    this.props.screenProps.deleteCard(id)
   }
 
   render() {

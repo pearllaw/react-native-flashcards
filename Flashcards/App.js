@@ -12,6 +12,7 @@ export default class App extends Component {
     this.saveCard = this.saveCard.bind(this)
     this.editingCard = this.editingCard.bind(this)
     this.updateCard = this.updateCard.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
   }
 
   saveCard(flashcard) {
@@ -33,11 +34,19 @@ export default class App extends Component {
         : flashcard
     })
     this.setState({ flashcards: updatedFlashcards })
+    AsyncStorage.setItem('flashcards', JSON.stringify(flashcards))
+  }
+
+  deleteCard(id) {
+    const { flashcards } = this.state
+    const updatedFlashcards = flashcards.filter(card => card.id !== id)
+    this.setState({ flashcards: updatedFlashcards })
+    AsyncStorage.setItem('flashcards', JSON.stringify(flashcards))
   }
 
   async componentDidMount() {
-    const getCards = await AsyncStorage.getItem('flashcards')
-    this.setState({ flashcards: JSON.parse(getCards) })
+    const getFlashcards = await AsyncStorage.getItem('flashcards')
+    this.setState({ flashcards: JSON.parse(getFlashcards) })
   }
 
   render() {
@@ -48,7 +57,8 @@ export default class App extends Component {
         isEditing,
         saveCard: this.saveCard, 
         editingCard: this.editingCard,
-        updateCard: this.updateCard
+        updateCard: this.updateCard,
+        deleteCard: this.deleteCard
       }} />
     )
   }
