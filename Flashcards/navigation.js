@@ -1,27 +1,11 @@
 import React, { Component } from 'react'
 import AddCard from './containers/addCard'
-import Deck from './containers/Deck'
 import EditCard from './containers/editCard'
-import { StyleSheet, View, Text } from 'react-native'
+import Deck from './containers/Deck'
+import Practice from './containers/Practice'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-
-class Practice extends Component {
-  static navigationOptions = {
-    title: 'Practice',
-    headerStyle: {
-      backgroundColor: '#6effff'
-    }
-  }
-  render() {
-    return (
-      <View style={styles.tabs}>
-        <Text>Practice</Text>
-      </View>
-    )
-  }
-}
 
 const CreateHeader = createStackNavigator({
   Create: AddCard
@@ -62,9 +46,3 @@ const NavigationStack = createBottomTabNavigator({
 
 export default NavigationStack
 
-const styles = StyleSheet.create({
-  tabs: {
-    flex: 1,
-    backgroundColor: '#00e5ff'
-  }
-})
