@@ -11,6 +11,7 @@ export default class App extends Component {
     }
     this.saveCard = this.saveCard.bind(this)
     this.editingCard = this.editingCard.bind(this)
+    this.updateCard = this.updateCard.bind(this)
   }
 
   saveCard(flashcard) {
@@ -22,6 +23,10 @@ export default class App extends Component {
 
   editingCard(selectedCard) {
     this.setState({ isEditing: selectedCard })
+  }
+
+  updateCard(card) {
+    console.log(card)
   }
 
   async componentDidMount() {
@@ -36,7 +41,8 @@ export default class App extends Component {
         flashcards,
         isEditing,
         saveCard: this.saveCard, 
-        editingCard: this.editingCard
+        editingCard: this.editingCard,
+        updateCard: this.updateCard
       }} />
     )
   }

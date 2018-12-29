@@ -21,7 +21,8 @@ export default class EditCard extends Component {
   }
 
   updateCard() {
-
+    this.props.screenProps.updateCard(this.state)
+    this.props.navigation.navigate('Deck')
   }
 
   render() {
