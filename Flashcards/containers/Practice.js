@@ -13,8 +13,13 @@ export default class Practice extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentIndex: 0
+      currentIndex: 0,
+      flashcards: []
     }
+  }
+
+  componentDidMount() {
+    this.setState({ flashcards: this.props.screenProps.flashcards })
   }
 
   render() {
