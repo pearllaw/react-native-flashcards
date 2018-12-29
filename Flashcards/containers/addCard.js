@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native'
+import { StyleSheet, ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import uuidv1 from 'uuid/v1'
 
 export default class AddCard extends Component {
@@ -13,7 +13,6 @@ export default class AddCard extends Component {
   constructor(props) {
     super(props) 
     this.state = {
-      flashcards: [],
       question: '',
       answer: ''
     }
@@ -21,7 +20,7 @@ export default class AddCard extends Component {
   }
 
   addCard() {
-    const { question, answer, flashcards } = this.state
+    const { question, answer } = this.state
     const id = uuidv1()
     const newCard = {
       id: id,
@@ -30,19 +29,12 @@ export default class AddCard extends Component {
     }
     const flashcard = Object.assign({}, newCard)
     if (question && answer !== '') {
-      this.setState(prevState => ({
-        flashcards: [...prevState.flashcards, flashcard],
+      this.setState({
         question: '',
         answer: ''
-      }))
+      })
     }
-    AsyncStorage.setItem('flashcards', JSON.stringify(flashcards))
-    this.props.navigation.navigate('Deck', {deck: flashcards})
-  }
-
-  async componentDidMount() {
-    const getCards = await AsyncStorage.getItem('flashcards')
-    this.setState({ flashcards: JSON.parse(getCards) })
+    this.props.screenProps.saveCard(flashcard)
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
@@ -29,25 +29,15 @@ export default class Deck extends Component {
       backgroundColor: '#6effff'
     }
   }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      deck: []
-    }
-  }
-
-  componentDidMount() {
-    const deck = this.props.navigation.state.params.deck
-    AsyncStorage.setItem('deck', JSON.stringify(deck))
-    this.setState({ deck })
-  }
-  
+ 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.state.deck.map(card => {
-          return <Card question={card.question} answer={card.answer} id={card.id} key={card.id} />
+        {this.props.screenProps.flashcards.map(card => {
+        return <Card key={card.id}
+          question={card.question} 
+          answer={card.answer} 
+          id={card.id} />
         })}
       </ScrollView>
     )
