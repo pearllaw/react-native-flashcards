@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
@@ -31,6 +31,10 @@ export default class Deck extends Component {
   }
  
   render() {
+    if (this.props.screenProps.flashcards.length === 0) 
+    return <View style={styles.messageContainer}>
+             <Text style={styles.text}>You do not have any flashcards</Text>
+           </View>
     return (
       <ScrollView style={styles.container}>
         {this.props.screenProps.flashcards.map(card => {
@@ -45,6 +49,16 @@ export default class Deck extends Component {
 }
 
 const styles = StyleSheet.create({
+  messageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00e5ff'
+  },
+  text: {
+    fontWeight: '300',
+    fontSize: 18
+  },
   container: {
     flex: 1,
     paddingTop: 50,

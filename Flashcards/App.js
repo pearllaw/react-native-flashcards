@@ -19,10 +19,10 @@ export default class App extends Component {
     AsyncStorage.setItem('flashcards', JSON.stringify(this.state.flashcards))
   }
 
-  async componentDidMount() {
-    const getCards = await AsyncStorage.getItem('flashcards')
-    this.setState({ flashcards: JSON.parse(getCards) })
-  }
+  // async componentDidMount() {
+  //   const getCards = await AsyncStorage.getItem('flashcards')
+  //   this.setState({ flashcards: JSON.parse(getCards) })
+  // }
 
   render() {
     const { flashcards } = this.state

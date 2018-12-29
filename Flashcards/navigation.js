@@ -6,38 +6,6 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 
-// class Create extends Component {
-//   static navigationOptions = {
-//     title: 'New Flashcard',
-//     headerStyle: {
-//       backgroundColor: '#6effff'
-//     }
-//   }
-//   render() {
-//     return (
-//       <View style={styles.tabs}>
-//         <AddCard />
-//       </View>
-//     )
-//   }
-// }
-
-// class Deck extends Component {
-//   static navigationOptions = {
-//     title: 'Deck',
-//     headerStyle: {
-//       backgroundColor: '#6effff'
-//     }
-//   }
-//   render() {
-//     return (
-//       <View style={styles.tabs}>
-//         <FlashcardDeck />
-//       </View>
-//     )
-//   }
-// }
-
 class Practice extends Component {
   static navigationOptions = {
     title: 'Practice',
@@ -54,13 +22,13 @@ class Practice extends Component {
   }
 }
 
-// const CreateHeader = createStackNavigator({
-//   Create: { screen: AddCard }
-// })
+const CreateHeader = createStackNavigator({
+  Create: { screen: AddCard }
+})
 
-// const DeckHeader = createStackNavigator({
-//   Deck: { screen: Deck }
-// })
+const DeckHeader = createStackNavigator({
+  Deck: { screen: Deck }
+})
 
 const PracticeHeader = createStackNavigator({
   Practice: { screen: Practice }
@@ -68,14 +36,14 @@ const PracticeHeader = createStackNavigator({
 
 const NavigationStack = createBottomTabNavigator({
   Create: {
-    screen: AddCard,
+    screen: CreateHeader,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <SimpleLineIcons name="plus" size={20} style={{ padding: 10 }} color={tintColor} />,
       tabBarOptions: { activeTintColor: '#38A1F3'}
     }
   },
   Deck: {
-    screen: Deck,
+    screen: DeckHeader,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="cards-outline" size={24} style={{ padding: 10 }} color={tintColor} />,
       tabBarOptions: { activeTintColor: '#38A1F3' }

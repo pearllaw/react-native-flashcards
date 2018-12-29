@@ -87,9 +87,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    marginBottom: 30,
-    textAlign: 'center',
-    fontWeight: '500'
+    marginBottom: 50,
+    textAlign: 'center'
   },
   input: {
     width: '100%'
@@ -100,7 +99,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     marginBottom: 20,
-    padding: 10
+    padding: 10,
+    fontWeight: '300'
   },
   answer: {
     fontSize: 16,
@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     padding: 10,
-    height: 200
+    height: 200,
+    fontWeight: '300'
   },
   button: {
     backgroundColor: '#1b1b1b',
@@ -122,6 +123,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontWeight: 'bold'
+    fontWeight: '500'
   }
 })
