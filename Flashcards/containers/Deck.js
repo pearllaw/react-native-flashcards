@@ -3,12 +3,12 @@ import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-nati
 import Entypo from '@expo/vector-icons/Entypo'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
-function Card({ question, answer }) {
+function Card({ question, answer, id, editCard }) {
   return (
     <View style={styles.card}>
       <View style={styles.icons}>
-        <MaterialIcons name="delete" size={18} style={{ padding: 5 }} />
-        <Entypo name="edit" size={18} style={{ padding: 5 }} />
+        <MaterialIcons id={id} name="delete" size={18} style={{ padding: 5 }} />
+        <Entypo id={id} name="edit" size={18} style={{ padding: 5 }} onPress={() => editCard(id)} />
       </View>
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle}>Question</Text>
@@ -29,7 +29,17 @@ export default class Deck extends Component {
       backgroundColor: '#6effff'
     }
   }
- 
+  constructor(props) {
+    super(props)
+    this.editCard = this.editCard.bind(this)
+  }
+
+  editCard(id) {
+    const selectedCard = this.props.screenProps.flashcards.filter(card => card.id === id)
+    this.props.screenProps.editingCard(selectedCard)
+    this.props.navigation.navigate('Edit')
+  }
+
   render() {
     if (this.props.screenProps.flashcards.length === 0) 
     return <View style={styles.messageContainer}>
@@ -41,7 +51,8 @@ export default class Deck extends Component {
         return <Card key={card.id}
           question={card.question} 
           answer={card.answer} 
-          id={card.id} />
+          id={card.id}
+          editCard={this.editCard} />
         })}
       </ScrollView>
     )

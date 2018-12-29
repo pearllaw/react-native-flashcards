@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AddCard from './containers/addCard'
 import Deck from './containers/Deck'
+import EditCard from './containers/editCard'
 import { StyleSheet, View, Text } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
@@ -23,15 +24,16 @@ class Practice extends Component {
 }
 
 const CreateHeader = createStackNavigator({
-  Create: { screen: AddCard }
+  Create: AddCard
 })
 
 const DeckHeader = createStackNavigator({
-  Deck: { screen: Deck }
+  Deck: Deck,
+  Edit: EditCard  
 })
 
 const PracticeHeader = createStackNavigator({
-  Practice: { screen: Practice }
+  Practice: Practice 
 })
 
 const NavigationStack = createBottomTabNavigator({
