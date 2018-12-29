@@ -31,6 +31,7 @@
     "react-devtools": "^3.4.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-card-flip": "^1.0.4",
+    "react-native-progress-bar-animated": "^1.0.6",
     "react-navigation": "^2.18.2",
     "uuidv1": "^1.6.14"
   },
