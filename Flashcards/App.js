@@ -26,7 +26,13 @@ export default class App extends Component {
   }
 
   updateCard(card) {
-    console.log(card)
+    const { flashcards } = this.state
+    const updatedFlashcards = flashcards.map(flashcard => {
+      return flashcard.id === card.id
+        ? Object.assign({}, flashcard, {question: card.question, answer: card.answer})
+        : flashcard
+    })
+    this.setState({ flashcards: updatedFlashcards })
   }
 
   async componentDidMount() {
