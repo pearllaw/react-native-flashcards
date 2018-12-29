@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import CardFlip from 'react-native-card-flip'
+import Octicons from '@expo/vector-icons/Octicons'
 
 export default class Practice extends Component {
   static navigationOptions = {
@@ -26,6 +27,7 @@ export default class Practice extends Component {
     const { flashcards } = this.state
     return (
       <View style={styles.container}>
+        <Octicons style={styles.iconLeft} name="chevron-left" />
         {flashcards.map((card, index) => (
         <CardFlip key={index} styles={styles.cardContainer} ref={(card) => this.card = card}>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
@@ -36,6 +38,7 @@ export default class Practice extends Component {
           </TouchableOpacity>
         </CardFlip>
         ))}
+        <Octicons style={styles.iconRight} name="chevron-right" />
       </View>
     )
   }
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00e5ff'
   },
   cardContainer: {
-    width: '80%',
+    width: '70%',
     height: 300
   },
   card: {
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     top: 200,
-    width: '80%',
+    width: '70%',
     height: 300,
     borderRadius: 10,
     backgroundColor: '#fff'
@@ -64,5 +67,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: '500'
+  },
+  iconLeft: {
+    fontSize: 50,
+    padding: 20,
+    position: 'absolute',
+    top: 300,
+  },
+  iconRight: {
+    fontSize: 50,
+    padding: 20,
+    position: 'absolute',
+    left: 350,
+    top: 300
   }
 })
