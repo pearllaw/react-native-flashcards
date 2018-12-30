@@ -45,8 +45,8 @@ export default class Practice extends Component {
     const { flashcards } = this.props.screenProps
     const barWidth = Dimensions.get('screen').width - 90
     const progressCustomStyles = {
-      backgroundColor: '#484848',
-      borderColor: '#484848'
+      backgroundColor: '#1b1b1b',
+      borderColor: '#1b1b1b'
     }
     return (
       <View style={styles.container}>
@@ -73,6 +73,10 @@ export default class Practice extends Component {
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Mark as incorrect</Text>
           </TouchableOpacity>
+          {currentIndex === flashcards.length - 1 && 
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Score report</Text>
+          </TouchableOpacity>}
         </View>
       </View>
     )
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 16,
-    marginTop: 90
+    marginTop: 65
   },
   bar: {
     marginTop: 40
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: 300,
     height: 250,
-    marginTop: 60
+    marginTop: 50
   },
   card: {
     width: 300,
@@ -114,23 +118,23 @@ const styles = StyleSheet.create({
     fontSize: 50,
     padding: 20,
     position: 'absolute',
-    top: 300,
+    top: Dimensions.get('screen').height * 0.3,
     left: -15
   },
   iconRight: {
     fontSize: 50,
     padding: 20,
     position: 'absolute',
-    top: 300,
+    top: Dimensions.get('screen').height * 0.3,
     right: -15
   },
   buttons: {
-    marginTop: 25
+    marginTop: 30
   },
   button: {
     borderRadius: 25,
     backgroundColor: '#1b1b1b',
-    margin: 12,
+    margin: 10,
     padding: 12
   },
   buttonText: {
