@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native'
-import Octicons from '@expo/vector-icons/Octicons'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import CardFlip from 'react-native-card-flip'
 import ProgressBarAnimated from 'react-native-progress-bar-animated'
 
@@ -64,8 +64,16 @@ export default class Practice extends Component {
             <Text style={styles.text}>{flashcards[currentIndex].answer}</Text>
           </TouchableOpacity>
         </CardFlip>
-        <Octicons style={styles.iconLeft} name="chevron-left" onPress={this.prev} />
-        <Octicons style={styles.iconRight} name="chevron-right" onPress={this.next} />
+        <MaterialIcons style={styles.iconLeft} name="chevron-left" onPress={this.prev} />
+        <MaterialIcons style={styles.iconRight} name="chevron-right" onPress={this.next} />
+        <View style={styles.buttons}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Got it!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Mark as incorrect</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -107,13 +115,28 @@ const styles = StyleSheet.create({
     padding: 20,
     position: 'absolute',
     top: 300,
-    left: 0
+    left: -15
   },
   iconRight: {
     fontSize: 50,
     padding: 20,
     position: 'absolute',
     top: 300,
-    right: 0
+    right: -15
+  },
+  buttons: {
+    marginTop: 25
+  },
+  button: {
+    borderRadius: 25,
+    backgroundColor: '#1b1b1b',
+    margin: 12,
+    padding: 12
+  },
+  buttonText: {
+    fontSize: 15,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#fff'
   }
 })
