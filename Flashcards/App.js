@@ -8,8 +8,8 @@ export default class App extends Component {
     this.state = {
       flashcards: [],
       isEditing: null,
-      correct: [],
-      incorrect: []
+      correctCards: [],
+      incorrectCards: []
     }
     this.saveCard = this.saveCard.bind(this)
     this.editingCard = this.editingCard.bind(this)
@@ -49,20 +49,20 @@ export default class App extends Component {
   }
 
   correct(card) {
-    const { correct, incorrect } = this.state
-    const updateIncorrect = incorrect.filter(flashcard => flashcard !== card)
-    if (!correct.includes(card) || incorrect.includes(card)) 
+    const { correctCards, incorrectCards } = this.state
+    const updateIncorrect = incorrectCards.filter(flashcard => flashcard !== card)
+    if (!correctCards.includes(card) || incorrectCards.includes(card)) 
       return this.setState({ 
-        correct: [...correct, card], incorrect: updateIncorrect 
+        correctCards: [...correctCards, card], incorrectCards: updateIncorrect 
       })
   }
 
   incorrect(card) {
-    const { correct, incorrect } = this.state
-    const updateCorrect = correct.filter(flashcard => flashcard !== card)
-    if (!incorrect.includes(card) || correct.includes(card)) 
+    const { correctCards, incorrectCards } = this.state
+    const updateCorrect = correctCards.filter(flashcard => flashcard !== card)
+    if (!incorrectCards.includes(card) || correctCards.includes(card)) 
       return this.setState({ 
-        correct: updateCorrect, incorrect: [...incorrect, card] 
+        correctCards: updateCorrect, incorrectCards: [...incorrectCards, card] 
       })
   }
 
@@ -72,11 +72,13 @@ export default class App extends Component {
   }
 
   render() {
-    const { flashcards, isEditing } = this.state
+    const { flashcards, isEditing, correctCards, incorrectCards } = this.state
     return (
       <NavigationStack screenProps={{
         flashcards,
         isEditing,
+        correctCards,
+        incorrectCards,
         saveCard: this.saveCard, 
         editingCard: this.editingCard,
         updateCard: this.updateCard,

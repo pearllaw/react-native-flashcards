@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
