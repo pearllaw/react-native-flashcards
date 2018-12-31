@@ -24,6 +24,7 @@ export default class Practice extends Component {
     this.next = this.next.bind(this)
     this.markCorrect = this.markCorrect.bind(this)
     this.markIncorrect = this.markIncorrect.bind(this)
+    this.showScore = this.showScore.bind(this)
   }
 
   prev() {
@@ -66,6 +67,10 @@ export default class Practice extends Component {
     }) 
   }
 
+  showScore() {
+    this.props.navigation.navigate('Summary')
+  }
+
   render() {
     const { currentIndex, progress, incorrect } = this.state
     const { flashcards } = this.props.screenProps
@@ -101,7 +106,7 @@ export default class Practice extends Component {
             <Text style={styles.buttonText}>Mark as incorrect</Text>
           </TouchableOpacity>
           {currentIndex === flashcards.length - 1 && 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.showScore}>
             <Text style={styles.buttonText}>Score report</Text>
           </TouchableOpacity>}
         </View>

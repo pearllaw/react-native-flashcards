@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AddCard from './containers/addCard'
 import EditCard from './containers/editCard'
 import Deck from './containers/Deck'
 import Practice from './containers/Practice'
+import ScoreReport from './containers/scoreReport'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
@@ -17,7 +18,8 @@ const DeckHeader = createStackNavigator({
 })
 
 const PracticeHeader = createStackNavigator({
-  Practice: Practice 
+  Practice: Practice,
+  Summary: ScoreReport
 })
 
 const NavigationStack = createBottomTabNavigator({
