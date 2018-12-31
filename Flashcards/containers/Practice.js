@@ -56,7 +56,7 @@ export default class Practice extends Component {
   }
 
   render() {
-    const { currentIndex, progress, incorrect } = this.state
+    const { currentIndex, progress } = this.state
     const { flashcards } = this.props.screenProps
     const card = flashcards[currentIndex]
     const barWidth = Dimensions.get('screen').width - 90
@@ -64,6 +64,10 @@ export default class Practice extends Component {
       backgroundColor: '#1b1b1b',
       borderColor: '#1b1b1b'
     }
+    if (flashcards.length === 0) 
+    return <View style={styles.messageContainer}>
+             <Text style={styles.messageText}>You do not have any flashcards to practice</Text>
+           </View>
     return (
       <View style={styles.container}>
         <Text style={styles.progressText}>Reviewing {currentIndex + 1} out of {flashcards.length} flashcards</Text>
@@ -100,6 +104,16 @@ export default class Practice extends Component {
 }
 
 const styles = StyleSheet.create({
+  messageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00e5ff'
+  },
+  messageText: {
+    fontWeight: '300',
+    fontSize: 18
+  },
   container: {
     flex: 1,
     backgroundColor: '#00e5ff',

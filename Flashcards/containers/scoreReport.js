@@ -9,6 +9,15 @@ export default class ScoreReport extends Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+    this.showIncorrect = this.showIncorrect.bind(this)
+  }
+
+  showIncorrect() {
+    this.props.navigation.navigate('Incorrect')
+  }
+
   render() {
     const { correctCards, incorrectCards, flashcards } = this.props.screenProps
     const percentage = Math.floor((correctCards.length / (flashcards.length) * 100))
@@ -18,11 +27,10 @@ export default class ScoreReport extends Component {
         <Text style={styles.percent}>{percentage} %</Text>
         <View>
           <Text style={styles.text}>Correct: {correctCards.length} | Incorrect: {incorrectCards.length}</Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.showIncorrect}>
             <Text style={styles.buttonText}>Review Incorrect Flashcards</Text>
           </TouchableOpacity>
         </View>
-        
       </View>
     )
   }

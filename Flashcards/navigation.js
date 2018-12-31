@@ -4,6 +4,7 @@ import EditCard from './containers/editCard'
 import Deck from './containers/Deck'
 import Practice from './containers/Practice'
 import ScoreReport from './containers/scoreReport'
+import IncorrectFlashcards from './containers/incorrectCards'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
@@ -19,7 +20,8 @@ const DeckHeader = createStackNavigator({
 
 const PracticeHeader = createStackNavigator({
   Practice: Practice,
-  Summary: ScoreReport
+  Summary: ScoreReport,
+  Incorrect: IncorrectFlashcards
 })
 
 const NavigationStack = createBottomTabNavigator({
