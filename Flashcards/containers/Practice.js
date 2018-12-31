@@ -16,10 +16,14 @@ export default class Practice extends Component {
     super(props)
     this.state = {
       currentIndex: 0,
-      progress: 0
+      progress: 0,
+      correct: [],
+      incorrect: []
     }
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
+    this.markCorrect = this.markCorrect.bind(this)
+    this.markIncorrect = this.markIncorrect.bind(this)
   }
 
   prev() {
@@ -40,9 +44,32 @@ export default class Practice extends Component {
     })
   }
 
+  markCorrect(card) {
+    const { correct, incorrect } = this.state
+    let unique = {}
+    const removeDuplicates = correct.filter(card => !unique[card] && (unique[card] = true))
+    const markCorrect = correct.filter(card => !incorrect.includes(card))
+    this.setState({ 
+      correct: correct.length > 0 ? removeDuplicates : [...correct, card],
+      incorrect: incorrect.length > 0 ? markCorrect : []
+    })
+  }
+
+  markIncorrect(card) {
+    const { correct, incorrect } = this.state
+    let unique = {}
+    const removeDuplicates = incorrect.filter(card => !unique[card] && (unique[card] = true))
+    const markIncorrect = incorrect.filter(card => !correct.includes(card))
+    this.setState({ 
+      correct: correct.length > 0 ? markIncorrect : [],
+      incorrect: incorrect.length > 0 ? removeDuplicates : [...incorrect, card]
+    }) 
+  }
+
   render() {
-    const { currentIndex, progress } = this.state
+    const { currentIndex, progress, incorrect } = this.state
     const { flashcards } = this.props.screenProps
+    const card = flashcards[currentIndex]
     const barWidth = Dimensions.get('screen').width - 90
     const progressCustomStyles = {
       backgroundColor: '#1b1b1b',
@@ -58,19 +85,19 @@ export default class Practice extends Component {
         </View>
         <CardFlip style={styles.cardContainer} ref={(card) => this.card = card}>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>{flashcards[currentIndex].question}</Text>
+            <Text style={styles.text}>{card.question}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => this.card.flip()}>
-            <Text style={styles.text}>{flashcards[currentIndex].answer}</Text>
+            <Text style={styles.text}>{card.answer}</Text>
           </TouchableOpacity>
         </CardFlip>
         <MaterialIcons style={styles.iconLeft} name="chevron-left" onPress={this.prev} />
         <MaterialIcons style={styles.iconRight} name="chevron-right" onPress={this.next} />
         <View style={styles.buttons}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => this.markCorrect(card)}>
             <Text style={styles.buttonText}>Got it!</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => this.markIncorrect(card)}>
             <Text style={styles.buttonText}>Mark as incorrect</Text>
           </TouchableOpacity>
           {currentIndex === flashcards.length - 1 && 
