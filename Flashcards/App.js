@@ -7,12 +7,16 @@ export default class App extends Component {
     super(props)
     this.state = {
       flashcards: [],
-      isEditing: null
+      isEditing: null,
+      correct: [],
+      incorrect: []
     }
     this.saveCard = this.saveCard.bind(this)
     this.editingCard = this.editingCard.bind(this)
     this.updateCard = this.updateCard.bind(this)
     this.deleteCard = this.deleteCard.bind(this)
+    this.correct = this.correct.bind(this)
+    this.incorrect = this.incorrect.bind(this)
   }
 
   saveCard(flashcard) {
@@ -44,6 +48,24 @@ export default class App extends Component {
     AsyncStorage.setItem('flashcards', JSON.stringify(flashcards))
   }
 
+  correct(card) {
+    const { correct, incorrect } = this.state
+    const updateIncorrect = incorrect.filter(flashcard => flashcard !== card)
+    if (!correct.includes(card) || incorrect.includes(card)) 
+      return this.setState({ 
+        correct: [...correct, card], incorrect: updateIncorrect 
+      })
+  }
+
+  incorrect(card) {
+    const { correct, incorrect } = this.state
+    const updateCorrect = correct.filter(flashcard => flashcard !== card)
+    if (!incorrect.includes(card) || correct.includes(card)) 
+      return this.setState({ 
+        correct: updateCorrect, incorrect: [...incorrect, card] 
+      })
+  }
+
   async componentDidMount() {
     const getFlashcards = await AsyncStorage.getItem('flashcards')
     this.setState({ flashcards: JSON.parse(getFlashcards) })
@@ -58,7 +80,9 @@ export default class App extends Component {
         saveCard: this.saveCard, 
         editingCard: this.editingCard,
         updateCard: this.updateCard,
-        deleteCard: this.deleteCard
+        deleteCard: this.deleteCard,
+        correct: this.correct,
+        incorrect: this.incorrect
       }} />
     )
   }

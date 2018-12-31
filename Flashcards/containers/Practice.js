@@ -16,9 +16,7 @@ export default class Practice extends Component {
     super(props)
     this.state = {
       currentIndex: 0,
-      progress: 0,
-      correct: [],
-      incorrect: []
+      progress: 0
     }
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
@@ -46,25 +44,11 @@ export default class Practice extends Component {
   }
 
   markCorrect(card) {
-    const { correct, incorrect } = this.state
-    let unique = {}
-    const removeDuplicates = correct.filter(card => !unique[card] && (unique[card] = true))
-    const markCorrect = correct.filter(card => !incorrect.includes(card))
-    this.setState({ 
-      correct: correct.length > 0 ? removeDuplicates : [...correct, card],
-      incorrect: incorrect.length > 0 ? markCorrect : []
-    })
+    this.props.screenProps.correct(card)
   }
 
   markIncorrect(card) {
-    const { correct, incorrect } = this.state
-    let unique = {}
-    const removeDuplicates = incorrect.filter(card => !unique[card] && (unique[card] = true))
-    const markIncorrect = incorrect.filter(card => !correct.includes(card))
-    this.setState({ 
-      correct: correct.length > 0 ? markIncorrect : [],
-      incorrect: incorrect.length > 0 ? removeDuplicates : [...incorrect, card]
-    }) 
+    this.props.screenProps.incorrect(card)
   }
 
   showScore() {
