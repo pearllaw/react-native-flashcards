@@ -1,7 +1,5 @@
-# React Native Flash Cards
+# React Native Flashcards
 A React mobile application for self-learners who want to expand their knowledge.
-
-#### [Live Demo]()
 
 ### Add a flashcard to your deck
 ![add-flashcard](https://user-images.githubusercontent.com/35009493/50575748-ecd47180-0db8-11e9-84c2-c3cc9798e855.gif)
