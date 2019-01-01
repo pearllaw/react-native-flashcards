@@ -14,9 +14,10 @@ export default class Practice extends Component {
 
   constructor(props) {
     super(props)
+    const { flashcards } = this.props.screenProps
     this.state = {
       currentIndex: 0,
-      progress: 0
+      progress: ((1 / flashcards.length) * 100)
     }
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
@@ -26,20 +27,20 @@ export default class Practice extends Component {
   }
 
   prev() {
-    const { currentIndex } = this.state
+    const { currentIndex, progress } = this.state
     const { flashcards } = this.props.screenProps
     this.setState({ 
       currentIndex: currentIndex === 0 ? 0 : currentIndex - 1,
-      progress: currentIndex === 0 ? 0 : Math.floor((currentIndex - 1) / (flashcards.length - 1) *100) 
+      progress: currentIndex === 0 ? ((1 / flashcards.length) * 100) : (progress - ((1 / flashcards.length) * 100))
     })
   }
 
   next() {
-    const { currentIndex } = this.state
+    const { currentIndex, progress } = this.state
     const { flashcards } = this.props.screenProps
     this.setState({ 
       currentIndex: currentIndex < flashcards.length - 1 ? currentIndex + 1 : flashcards.length - 1,
-      progress: currentIndex < flashcards.length - 1 ? Math.floor((currentIndex + 1) / (flashcards.length - 1) *100) : 100
+      progress: currentIndex < flashcards.length - 1 ? (progress + ((1 / flashcards.length) * 100)) : 100
     })
   }
 
